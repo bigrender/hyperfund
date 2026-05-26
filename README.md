@@ -1,8 +1,8 @@
 # hyperfund
 
-**Real-time Hyperliquid funding rate monitor and delta-neutral scanner, written in Rust.**
+**Hyperliquid has 230+ perp markets. Some of them are paying you 20%+ APR just to hold a position right now. This tool shows you which ones.**
 
-Scans all 230+ Hyperliquid perpetual markets, ranks by funding rate, and estimates the yield of a dollar-neutral long/short basket — giving you an instant read on where the funding edge lives right now.
+One binary. No API key. Live funding data every run.
 
 ```
   HYPERFUND  ·  Hyperliquid Funding Rates
