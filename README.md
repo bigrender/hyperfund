@@ -29,7 +29,7 @@ Hyperliquid pays funding every hour. Long positions in negative-funding markets 
 
 In practice, the basket is not perfectly market-neutral: shorting high-funding (crowded long) coins and longing low-funding (crowded short) coins introduces adverse momentum exposure. This tool surfaces the raw funding edge. A full backtest is needed before trading.
 
-The [`backtest/`](../backtest/) directory contains the Python backtesting engine that quantifies the funding vs. price residual decomposition. The Rust binary here is the live scanning companion.
+A companion Python backtesting engine quantifies the funding vs. price residual decomposition. The Rust binary here is the live scanning companion.
 
 ## Install
 
