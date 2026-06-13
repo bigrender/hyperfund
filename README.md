@@ -4,23 +4,25 @@
 
 One binary. No API key. Live funding data every run.
 
+Example run (`rates --min-oi 10000000`, real snapshot — funding moves every hour):
+
 ```
   HYPERFUND  ·  Hyperliquid Funding Rates
-  12:42:53 UTC
   ─────────────────────────────────────────────────────────────
 
   LONG CANDIDATES  (negative funding → you collect)
   COIN            RATE/HR          APR       OI (USD)
   ─────────────────────────────────────────────────────────────
-  TON            -0.0019%       -16.3%         $34.2M
-  BTC            -0.0007%        -6.6%          $1.2B
-  XRP            -0.0004%        -3.8%         $180.1M
+  TRUMP          -0.0226%      -197.6%         $11.6M
+  TON            -0.0049%       -43.3%         $38.7M
+  TRX            -0.0026%       -22.5%         $18.8M
 
   SHORT CANDIDATES  (positive funding → you collect)
   COIN            RATE/HR          APR       OI (USD)
   ─────────────────────────────────────────────────────────────
-  ZRO            +0.0022%       +19.4%         $34.7M
-  XMR            +0.0013%       +11.0%         $12.3M
+  XMR            +0.0089%       +78.2%         $42.0M
+  LIT            +0.0013%       +11.0%         $60.8M
+  MON            +0.0013%       +11.0%         $26.4M
 ```
 
 ## Why
