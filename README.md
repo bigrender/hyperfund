@@ -4,6 +4,8 @@
 
 One binary. No API key. Live funding data every run.
 
+📊 **[Live funding snapshot →](./SNAPSHOT.md)** — auto-refreshed every 6 hours.
+
 Example run (`rates --min-oi 10000000`, real snapshot — funding moves every hour):
 
 ```
