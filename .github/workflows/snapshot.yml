@@ -1,12 +1,13 @@
 name: funding-snapshot
 
 # Publishes a live Hyperliquid funding snapshot to SNAPSHOT.md.
-# Manual trigger only (Actions tab → Run workflow). Uses the built-in
-# GITHUB_TOKEN to commit back — no secrets. To enable a recurring refresh
-# later, add a `schedule:` cron block under `on:` (e.g. "0 */6 * * *").
+# Runs every 6 hours (plus manual trigger). Uses the built-in
+# GITHUB_TOKEN to commit back — no secrets.
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
 
 permissions:
   contents: write
