@@ -1,5 +1,6 @@
 mod api;
 mod display;
+mod server;
 mod strategy;
 
 use clap::{Parser, Subcommand};
@@ -25,6 +26,15 @@ enum Command {
         /// Watch mode: refresh every N seconds
         #[arg(short, long)]
         watch: Option<u64>,
+    },
+    /// Serve funding signals as an x402-paid HTTP API
+    Serve {
+        /// Port to listen on
+        #[arg(short, long, default_value = "8080")]
+        port: u16,
+        /// Base address receiving USDC payments (0x…)
+        #[arg(long)]
+        pay_to: String,
     },
     /// Show delta-neutral strategy snapshot
     Scan {
@@ -58,6 +68,9 @@ async fn main() -> anyhow::Result<()> {
         }
         Command::Scan { k, capital, min_oi } => {
             run_scan(k, capital, min_oi).await?;
+        }
+        Command::Serve { port, pay_to } => {
+            server::serve(port, &pay_to).await?;
         }
     }
 

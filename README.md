@@ -74,6 +74,35 @@ hyperfund scan --capital 10000 --k 5 --min-oi 10000000
 
 Output includes estimated `$/day` and `% APR` from funding alone, with an explicit warning that price residual is excluded. Use the backtest to model the full P&L.
 
+## Agent API (x402)
+
+**Your AI agent can pay half a cent for a funding edge. No API key, no signup, no subscription.**
+
+The same engine also runs as an HTTP service where AI agents settle in USDC per request over [x402](https://docs.cdp.coinbase.com/x402/welcome) — the HTTP 402 payment protocol. CoinGecko sells prices this way; hyperfund sells edges.
+
+```bash
+hyperfund serve --port 8080 --pay-to 0xYourBaseAddress
+```
+
+| Endpoint | Price | Returns |
+|---|---|---|
+| `GET /` | free | service description + live prices |
+| `GET /preview` | free | top-1 long/short funding edge |
+| `GET /rates?k=&min_oi=` | $0.005 USDC | full funding ranking |
+| `GET /basket?capital=&k=&min_oi=` | $0.02 USDC | delta-neutral basket plan with per-leg sizing |
+
+An unpaid request to a priced route returns `402` with the payment requirements; any x402 client library handles the retry automatically.
+
+```bash
+# free — no wallet needed
+curl https://your-host/preview
+
+# paid — 402 first, then the agent's x402 client attaches the USDC authorization
+curl -i https://your-host/rates?k=8&min_oi=10000000
+```
+
+Settlement is USDC on Base via the `exact` scheme. Configure with `X402_PRICE_RATES`, `X402_PRICE_BASKET`, `X402_NETWORK` (`base` | `base-sepolia`), `X402_FACILITATOR`, and `X402_BASE_URL` (required in production — it sets the public resource URI in the 402 response).
+
 ## Architecture
 
 ```
@@ -81,6 +110,7 @@ src/
 ├── main.rs      — CLI entry (clap), command dispatch
 ├── api.rs       — Hyperliquid Info API (metaAndAssetCtxs, no SDK dependency)
 ├── strategy.rs  — Dollar-neutral basket construction, funding yield estimate
+├── server.rs    — x402-paid HTTP API (axum), 60s market cache
 └── display.rs   — Colored terminal output
 ```
 
